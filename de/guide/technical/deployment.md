@@ -19,7 +19,7 @@ schon!
   FTP- oder SFTP-Anmeldeinformationen suchen. Alternativ haben die meisten Anbieter einen
   Dateimanager in ihre Verwaltungsoberfläche eingebettet. Um eine einzelne Datei hochzuladen, reicht
   dies aus.
-- **SSH Certificate**: Deine Website sollte über HTTPS zugänglich sein. Dies ist jedoch keine
+- **SSL Certificate**: Deine Website sollte über HTTPS zugänglich sein. Dies ist jedoch keine
   strenge Anforderung. Es wird empfohlen und wirkt sich positiv auf die Privatsphäre deiner
   Besucher:innen aus.
 

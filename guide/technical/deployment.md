@@ -17,7 +17,7 @@ deployed to your webspace. And thats it. Easy as pie.
   control panel of your webspace provider, or you can look for the FTP or SFTP credentials.
   Alternatively, most providers have a file manager embedded in their web portal. To upload a single
   file, this will suffice.
-- **SSH Certificate**: Your website traffic should be accessible over HTTPS. This is however not a
+- **SSL Certificate**: Your website traffic should be accessible over HTTPS. This is however not a
   strict requirement. It is recommended and has a positive impact on your visitors privacy.
 
 ### Step-by-step
