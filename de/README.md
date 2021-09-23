@@ -12,17 +12,16 @@ footer: 'Lizenz: GPL 3.0 | Copyright © 2019-present Till Sanders'
   <br><br>
 </div>
 
-::: tip Bevorstehender Workshop – entwickelt mit uns eigene Thesen für einen Wahlkompass!
+::: tip Neu: Der Multiplayer Modus <Badge text="alpha" type="error"/>
+Die neue Funktion "Freunde" ermöglicht dir gemeinsame Sitzungen mit deinen Freund:innen, deiner
+Familie oder deinen Kolleg:innen. Starte einfach eine gemeinsame Sitzung über die Option im
+Hauptmenü und lade deine Gäste mit deiner Gastgeber-ID ein. Beobachtet die Fortschritte aller
+Teilnehmenden und seht die Antworten direkt neben den Aussagen der Parteien. Alle Informationen
+werden direkt von Gerät zu Gerät (P2P), nur mit einem Signalserver geteilt – es gibt keine
+Datenbank!
 
-Du bist in der Jugendarbeit tätig und planst einen Wahlkompass mit Jugendlichen durchzuführen oder
-bist allgemein an dem Thema interessiert? Dann kannst du hier die bewährte Methode eines Workshops
-zur Entwicklung eigener Wahlkompass-Thesen selbst erleben. Wir berichten über die Methode und geben
-dir den Raum einmal eigene Thesen zu entwickeln.
-
-<a href="/de/republica-21.html">Mehr erfahren</a>
+Jetzt im HTML-Generator aktivieren!
 :::
-
-[![In the meantime.](./in-the-meantime.jpg)](/de/republica-21.html)
 
 ::: tip Schau jetzt den Vortrag 'Patching Democracy'! (Englisch)
 2020 war ein großartiges Jahr für dieses Projekt. Wir freuen uns sowohl über den ersten großen
@@ -146,6 +145,13 @@ Version 1.0.0 befindet sich noch in der Entwicklung und automatisierte Tests sin
       Benutzer:innen spenden ihre Antworten zur wissenschaftlichen und statistischen Auswertung.
     </p>
   </div>
+  <div class="feature">
+    <h2>Multiplayer Modus</h2>
+    <p>
+      Lade deine Freunde zu einer gemeinsamen Peer-to-Peer Sitzung ein, vergleicht eure Antworten
+      und startet eine Diskussion.
+    </p>
+  </div>
 </div>
 
 ## Roadmap :seedling:
@@ -155,13 +161,6 @@ weitere sind bereits in Arbeit. Einige erscheinen in den nächsten Monaten, ande
 in Planung. Aber eines ist sicher – wir sind noch lange nicht fertig:
 
 <div class="features">
-  <div class="feature">
-    <h2>Peer-to-Peer Sitzungen</h2>
-    <p>
-      Lade deine Freunde zu einer gemeinsamen Sitzung ein, vergleicht eure Antworten und startet
-      eine Diskussion.
-    </p>
-  </div>
   <div class="feature">
     <h2>Marketing Vorlagen</h2>
     <p>

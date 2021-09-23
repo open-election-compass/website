@@ -18,7 +18,6 @@
       <FieldSelect
         alias="kioskMode"
         :name="$t('fields.kioskMode.name')"
-        type="text"
         rules=""
         v-model="store.kioskMode"
         :options="[
@@ -26,6 +25,42 @@
           { value: 'on', name: $t('fields.kioskMode.options.on') },
         ]"
         :description="$t('fields.kioskMode.description')"
+      />
+      <FieldSelect
+        alias="friendsEnabled"
+        :name="$t('fields.friendsEnabled.name')"
+        rules=""
+        v-model="store.friendsEnabled"
+        :options="[
+          { value: 'off', name: $t('fields.friendsEnabled.options.off') },
+          { value: 'on', name: $t('fields.friendsEnabled.options.on') },
+        ]"
+        :description="$t('fields.friendsEnabled.description')"
+      />
+      <FieldInput
+        alias="friendsHost"
+        :name="$t('fields.friendsHost.name')"
+        type="text"
+        rules=""
+        v-model="store.friendsHost"
+        :placeholder="$t('fields.friendsHost.placeholder')"
+        :description="$t('fields.friendsHost.description')"
+      />
+      <FieldInput
+        alias="friendsPort"
+        :name="$t('fields.friendsPort.name')"
+        type="text"
+        rules="numeric"
+        v-model="store.friendsPort"
+        :placeholder="$t('fields.friendsPort.placeholder')"
+      />
+      <FieldInput
+        alias="friendsPath"
+        :name="$t('fields.friendsPath.name')"
+        type="text"
+        rules=""
+        v-model="store.friendsPath"
+        :placeholder="$t('fields.friendsPath.placeholder')"
       />
     </fieldset>
     <fieldset v-if="configuration">
@@ -87,6 +122,7 @@
 
 <script>
 import * as Eta from 'eta';
+import tag from 'html-tag';
 import { v1 as uuid } from 'uuid';
 import { localize, ValidationObserver } from 'vee-validate';
 import de from 'vee-validate/dist/locale/de.json';
@@ -123,6 +159,10 @@ export default {
         description: {},
         title: {},
         kioskMode: 'off',
+        friendsEnabled: 'on',
+        friendsHost: 'friends.open-election-compass.com',
+        friendsPort: 443,
+        friendsPath: null,
         openGraphImage: null,
         openGraphUrl: null,
       },
@@ -164,9 +204,14 @@ export default {
         return this.resultBlobUrl = null;
       }
       const html = Eta.render(template, {
+        tag,
         languages: this.languages,
         defaultLanguage: this.languages[0],
         kioskMode: this.store.kioskMode,
+        friendsEnabled: this.store.friendsEnabled,
+        friendsHost: this.store.friendsHost,
+        friendsPort: this.store.friendsPort,
+        friendsPath: this.store.friendsPath,
         title: this.store.title,
         description: this.store.description,
         openGraphImage: this.store.openGraphImage,
@@ -208,6 +253,27 @@ export default {
               on: 'enabled',
             },
           },
+          friendsEnabled: {
+            name: 'Shared Sessions aka Friends (Multiplayer Mode)',
+            description: 'Activate Shared Sessions to allow users to connect to friends using a secure and direct peer-to-peer connection.',
+            options: {
+              off: 'disabled',
+              on: 'enabled',
+            },
+          },
+          friendsHost: {
+            name: 'Server for Shared Sessions, Hostname',
+            description: 'For browsers to find each other and establish a peer-to-peer connection for Shared Sessions, they need a signalling server. The actual data is transferred directly from browser to browser to avoid privacy issues. The OpenElectionCompass project maintains such a server, but you can also host your own using Peer.js.',
+            placeholder: 'friends.open-election-compass.com'
+          },
+          friendsPort: {
+            name: 'Server for Shared Sessions, Port',
+            placeholder: '9000'
+          },
+          friendsPath: {
+            name: 'Server for Shared Sessions, Path',
+            placeholder: '/'
+          },
           openGraphImage: {
             name: 'Open Graph Image',
             description: 'Many social networks support a standard called Open Graph. This allows you to provide content that is used to provide a preview whenever someone shares a link to your election compass on Facebook, Twitter, etc. The preview typically consists of a title, description and optionally an image. If you have a suiting image, make it publicly available on a webserver and enter the URL here. Use a 1200 x 630 px graphic, preferably PNG.',
@@ -245,9 +311,30 @@ export default {
             name: 'Kiosk Modus',
             description: 'Aktiviere den Kiosk Modus, falls du deinen Wahlkompass an einem öffentlichen Ort ausstellen möchtest. Das System wird eine Möglichkeit zum Zurücksetzen des Wahlkompasses anbieten und diese nach einer bestimmten Inaktivitätsperiode auch automatisch ausführen.',
             options: {
-              off: 'disabled',
-              on: 'enabled',
+              off: 'deaktiviert',
+              on: 'aktiviert',
             },
+          },
+          friendsEnabled: {
+            name: 'Gemeinsame Sitzungen aka Freunde (Multiplayer Modus)',
+            description: 'Aktiviere Gemeinsame Sitzungen und ermögliche Besucher:innen eine sichere und direkte Peer-to-Peer Verbindung mit Freund:innen herzustellen.',
+            options: {
+              off: 'deaktiviert',
+              on: 'activiert',
+            },
+          },
+          friendsHost: {
+            name: 'Server für Gemeinsame Sitzungen, Hostname',
+            description: 'Damit Browser sich gegenseitig finden und eine Peer-to-Peer Verbindung für eine Gemeinsame Sitzung aufbauen können, benötigen sie einen Signalling Server. Die eigentlichen Daten werden direkt von Browser an Browser übertragen um Datenschutzprobleme zu vermeiden. Das OpenElectionCompass Projekt betreibt einen solchen Server, du kannst jedoch mit Peer.js auch deinen eigenen aufsetzen.',
+            placeholder: 'friends.open-election-compass.com'
+          },
+          friendsPort: {
+            name: 'Server für Gemeinsame Sitzungen, Port',
+            placeholder: '9000'
+          },
+          friendsPath: {
+            name: 'Server für Gemeinsame Sitzungen, Path',
+            placeholder: '/'
           },
           openGraphImage: {
             name: 'Open Graph Grafik',

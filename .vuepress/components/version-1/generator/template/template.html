@@ -23,7 +23,16 @@
   </head>
   <body>
     <div id="open-election-compass">
-      <open-election-compass load-tag="#oec-content"<%= it.kioskMode == 'on' ? ' kiosk-mode' : '' %> />
+      <%~
+        it.tag('open-election-compass', {
+          'load-tag': '#oec-content',
+          'kiosk-mode': it.kioskMode === 'on',
+          'friends': it.friendsEnabled === 'on',
+          'friends-host': it.friendsEnabled === 'on' && it.friendsHost ? it.friendsHost : false,
+          'friends-port': it.friendsEnabled === 'on' && it.friendsPort ? it.friendsPort : false,
+          'friends-path': it.friendsEnabled === 'on' && it.friendsPath ? it.friendsPath : false,
+        }, false)
+      %>
     </div>
     <script>
       <%~ it.library %>

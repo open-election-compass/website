@@ -12,17 +12,14 @@ footer: GPL-3.0 Licensed | Copyright © 2019-present Till Sanders
   <br><br>
 </div>
 
-::: tip Bevorstehender Workshop – entwickelt mit uns eigene Thesen für einen Wahlkompass! (German)
+::: tip New: Multiplayer Mode <Badge text="alpha" type="error"/>
+The new "Friends" feature gives you shared sessions with your friends, family or colleagues. Simply
+start a shared session using the option in the main menu and invite your guests using your host ID.
+Watch the progress of everyone participating and see their answers beside the parties' statements.
+All information is shared peer to peer with only a signalling server – no database involved!
 
-Du bist in der Jugendarbeit tätig und planst einen Wahlkompass mit Jugendlichen durchzuführen oder
-bist allgemein an dem Thema interessiert? Dann kannst du hier die bewährte Methode eines Workshops
-zur Entwicklung eigener Wahlkompass-Thesen selbst erleben. Wir berichten über die Methode und geben
-dir den Raum einmal eigene Thesen zu entwickeln.
-
-<a href="/de/republica-21.html">Mehr erfahren</a>
+Activate now in the HTML Generator!
 :::
-
-[![In the meantime.](./de/in-the-meantime.jpg)](/de/republica-21.html)
 
 ::: tip Watch the talk 'Patching Democracy' now!
 2020 was a great year for the project. Not only did we see the first big installment in
@@ -109,6 +106,13 @@ Version 1.0.0 is still under development and coverage of automated tests is not 
     <h2>Zero-Cookie Analysis</h2>
     <p>Let people donate their answers for scientific research and statistics.</p>
   </div>
+  <div class="feature">
+    <h2>Multiplayer Mode</h2>
+    <p>
+      Invite your friends to a shared peer-to-peer session, see their positions and start a
+      discussion.
+    </p>
+  </div>
 </div>
 
 ## Roadmap :seedling:
@@ -118,10 +122,6 @@ more ideas in the pipeline. Some are coming in the next months, some are still i
 thing is certain – we're not done yet. Take a look:
 
 <div class="features">
-  <div class="feature">
-    <h2>Peer-to-Peer sessions</h2>
-    <p>Invite your friends to a shared session, see their positions and start a discussion.</p>
-  </div>
   <div class="feature">
     <h2>Marketing Templates</h2>
     <p>Save even more time with professionally designed marketing material, ready to go.</p>
