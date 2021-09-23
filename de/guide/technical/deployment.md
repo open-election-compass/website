@@ -38,8 +38,77 @@ schon!
 
 ## Option 2: Manuelles, statisches Setup
 
-TODO
+### Skript einbinden
+
+Place in the head of your HTML document. For privacy, security and legal reasons, you should
+consider hosting the library yourself. But for a quick test run, the unpkg CDN is fine.
+
+Im Kopf deines HTML-Dokuments platzieren. Aus Datenschutz-, Sicherheits- und rechtlichen Gründen
+solltest du erwägen, das Skript selbst bereitzustellen. Aber für einen schnellen Testlauf ist das
+unpkg-CDN in Ordnung.
+
+Hinweis: Der UMD-Build enthält eine Vue.js-Version.
+
+```html
+<script src="https://unpkg.com/@open-election-compass/client/dist/lib/open-election-compass.umd.min.js" defer>
+```
+
+### Die Inhalte laden (deine Konfiguration)
+
+Nun zum Inhalt. Du musst deine Konfiguration einbinden. Im statischen Setup hast du zwei
+Optionen:
+
+#### Variante A: Mit einem script-Element
+
+Du kannst die komplette Konfiguration in einem weiteren script-Tag in deinem HTML unterbringen:
+
+```html
+<div id="open-election-compass">
+   <open-election-compass load-tag="#oec-content" />
+</div>
+
+<script type="application/json" id="oec-content">
+   // Platziere deine Konfiguration hier. Dies ist auch das Vorgehen des HTML-Generators.
+</script>
+```
+
+#### Variante B: Von einer separaten URL laden
+
+Alternativ kannst du den OpenElectionCompass anweisen, die Konfiguration von einer bestimmten URL zu
+laden. Dies ist langsamer als Variante A.
+
+```html
+<div id="open-election-compass">
+   <open-election-compass load-url="./your-configuration.json" />
+</div>
+```
 
 ## Option 3: Manuelles Setup mit Nuxt.js
 
-TODO
+1. Installiere den Client: `npm i @open-election-compass/client` oder `yarn add @open-election-compass/client`.
+2. Lade das Modul in deiner `nuxt.config.js`:
+   ```javascript
+      {
+         modules: [
+            '@open-election-compass/client/src/nuxtModule.js',
+            // ...
+         ]
+      }
+   ```
+3. Verwende die Komponente mit dem `load-object` Property:
+   ```html
+      <OpenElectionCompass :load-object="yourConfiguration" />
+   ```
+
+## HTML Attribute
+
+Das `<open-election-compass>` Element kennt eine Reihe von Attributen:
+
+- `load-tag` – Übergebe einen CSS Selektor um eine Konfiguration von diesem Skript-Tag zu laden.
+- `load-url` – Übergebe eine URL um die Konfiguration von dort zu laden.
+- `load-object` – Übergebe eine Konfiguration als ein JavaScript-Objekt.
+- `kiosk-mode` – Aktiviert den Kiosk Modus. Standard: `false`.
+- `friends` – Aktiviert den "Multiplayer" Modus, der geteilte Sitzungen erlaubt. Standard: `false`.
+- `friends-host` – Die URL der Peer.js Server Instanz. Standard: `'friends.open-election-compass.com'`.
+- `friends-port` – Der Port der Peer.js Server Instanz. Standard: `443`.
+- `friends-path` – Der Pfad der Peer.js Server Instanz. Standard: `'/'`.

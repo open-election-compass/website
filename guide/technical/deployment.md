@@ -40,8 +40,73 @@ deployed to your webspace. And thats it. Easy as pie.
 
 ## Option 2: Manual, static set-up
 
-TBD
+### Include the library
+
+Place in the head of your HTML document. For privacy, security and legal reasons, you should
+consider hosting the library yourself. But for a quick test run, the unpkg CDN is fine.
+
+Note, that the UMD build as Vue.js inlined.
+
+```html
+<script src="https://unpkg.com/@open-election-compass/client/dist/lib/open-election-compass.umd.min.js" defer>
+```
+
+### Loading the content (your configuration)
+
+Now for the content. You need to get your configuration in there. In the static setup, you have two
+options:
+
+#### Variant A: Using a script-element
+
+You can place the complete configuration in your HTML using another script tag:
+
+```html
+<div id="open-election-compass">
+   <open-election-compass load-tag="#oec-content" />
+</div>
+
+<script type="application/json" id="oec-content">
+   // Place your configuration here. This is what the HTML Generator does.
+</script>
+```
+
+#### Variant B: Load from separate URL
+
+Alternatively, you can tell the OpenElectionCompass to load the configuration from a given URL. This
+will be slower than Variant A.
+
+```html
+<div id="open-election-compass">
+   <open-election-compass load-url="./your-configuration.json" />
+</div>
+```
 
 ## Option 3: Manual set-up using Nuxt.js
 
-TBD
+1. Install the client: `npm i @open-election-compass/client` or `yarn add @open-election-compass/client`.
+2. Load the module in your `nuxt.config.js`:
+   ```javascript
+      {
+         modules: [
+            '@open-election-compass/client/src/nuxtModule.js',
+            // ...
+         ]
+      }
+   ```
+3. Use the component with the `load-object` property:
+   ```html
+      <OpenElectionCompass :load-object="yourConfiguration" />
+   ```
+
+## HTML Attributes
+
+The `<open-election-compass>` element knows a number of attributes to allow customization:
+
+- `load-tag` – Pass a CSS selector to load configuration from that script tag.
+- `load-url` – Pass a URL to load configuration from there.
+- `load-object` – Pass the configuration as a JavaScript object.
+- `kiosk-mode` – Activates the kiosk mode. Default: `false`.
+- `friends` – Activates the "Multiplayer" mode that allows for shared sessions. Default: `false`.
+- `friends-host` – The URL of the Peer.js server instance. Default: `'friends.open-election-compass.com'`.
+- `friends-port` – The port of the Peer.js server instance. Default: `443`.
+- `friends-path` – The path of the Peer.js server instance. Default: `'/'`.
