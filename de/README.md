@@ -111,9 +111,9 @@ Version 1.0.0 befindet sich noch in der Entwicklung und automatisierte Tests sin
     </p>
   </div>
   <div class="feature">
-    <h2>Berrierefrei</h2>
+    <h2>Barrierefrei</h2>
     <p>
-      Berrierefreiheit ist kein Nebengedanke. Unterstützung für Screen Reader und Navigation per
+      Barrierefreiheit ist kein Nebengedanke. Unterstützung für Screen Reader und Navigation per
       Tastatur.
     </p>
   </div>
