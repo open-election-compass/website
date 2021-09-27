@@ -19,6 +19,7 @@
 <script>
 import { v1 as uuid } from 'uuid';
 import _forEach from 'lodash/forEach';
+import yaml from 'js-yaml';
 
 export default {
   name: 'StorageButtons',
@@ -81,6 +82,7 @@ export default {
             uuid: uuid(),
             name: language.name,
             code: language.code,
+            overwrites: typeof language.overwrites === 'object' ? yaml.dump(language.overwrites) : '',
           });
         });
 

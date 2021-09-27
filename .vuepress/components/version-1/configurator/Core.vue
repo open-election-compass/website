@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       store: {
-        languages: [{ uuid: uuid(), name: 'English', code: 'en' }],
+        languages: [{ uuid: uuid(), name: 'English', code: 'en', overwrites: '' }],
         algorithm: 'cityblock/approve-neutral-reject',
         title: {},
         subtitle: {},

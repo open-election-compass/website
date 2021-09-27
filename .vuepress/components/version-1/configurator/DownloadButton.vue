@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import { v1 as uuid } from 'uuid';
 import _forEach from 'lodash/forEach';
+import yaml from 'js-yaml';
 
 export default {
   name: 'DownloadButton',
@@ -60,6 +60,10 @@ export default {
         return {
           name: language.name,
           code: language.code,
+          overwrites: (
+            typeof language.overwrites === 'string'
+            && language.overwrites.trim().length > 0 ? yaml.load(language.overwrites) : undefined
+          ),
         };
       });
       configuration.title = this.keyTranslationsByLanguageCode(store.languages, store.title);
