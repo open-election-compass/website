@@ -87,6 +87,35 @@ Inhaltliche Elemente, wie Thesen und Antworten, können nun in einem Unterobjekt
 Wie das geht, siehst du im Beispiel des nächsten Abschnitts. Alle Attribute für die ein Objekt mit
 Übersetzungen erwartet wird, sind als 'mehrsprachig' markiert.
 
+### Standard-Übersetzungen überschreiben
+
+Jede beliebige Zeichenfolge der Standard-Übersetzungsdateien kann überschreiben werden. Repliziere
+einfach die Struktur der YAML-Übersetzungsdateien und deine Übersetzungen werden eingefügt, wenn die
+Anwendung geladen wird.
+
+```json
+{
+  "version": "1",
+  "languages": [{
+    "name": "English",
+    "code": "en"
+  }, {
+    "name": "Deutsch",
+    "code": "de",
+    "overwrites": {
+      "elements": { // <-- Dies ist ein Schlüssel auf der ersten Ebene der YAML-Übersetzungsdatei
+        "guide-button": {
+          "introduction": "Jetzt starten!"
+        }
+      }
+    }
+  }]
+}
+```
+
+Mehr zum Überschreiben von Übersetzungen in der Anleitung:
+[Übersetzungen überschreiben](/de/guide/technical/overwriting-translations.html).
+
 ## Allgemeine Informationen
 
 Auf der obersten Ebene enthält die Konfiguration allgemeine Informationen wie Titel und Untertitel,

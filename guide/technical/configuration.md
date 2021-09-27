@@ -86,6 +86,35 @@ Content elements, such as theses and answers, can now be translated in a sub-obj
 to do this in the example of the next section. All attributes where an object with translations is
 expected are marked as 'multilingual'.
 
+### Overwriting standard translations
+
+You can pass overwrites for any string in the standard translation files. Just replicate the
+structure of the YAML translation files and your translations will be merged when the application
+is loaded.
+
+```json
+{
+  "version": "1",
+  "languages": [{
+    "name": "English",
+    "code": "en",
+    "overwrites": {
+      "elements": { // <-- This a first level key in the YAML translation file
+        "guide-button": {
+          "introduction": "Get started!"
+        }
+      }
+    }
+  }, {
+    "name": "Deutsch",
+    "code": "de"
+  }]
+}
+```
+
+More on overwriting translation in the guide:
+[Overwriting Translations](/guide/technical/overwriting-translations.html).
+
 ## General Information
 
 On the root level, the JSON files contain general information, like the title and subtitle, as

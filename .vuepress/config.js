@@ -38,6 +38,7 @@ module.exports = {
                   { text: 'Overview', link: '/guide/technical/overview.html' },
                   { text: 'Deployment', link: '/guide/technical/deployment.html' },
                   { text: 'Configuration', link: '/guide/technical/configuration.html' },
+                  { text: 'Guide: Overwriting Translations', link: '/guide/technical/overwriting-translations.html' },
                 ],
               },
               {
@@ -145,6 +146,7 @@ module.exports = {
                   { text: 'Übersicht', link: '/de/guide/technical/overview.html' },
                   { text: 'Deployment', link: '/de/guide/technical/deployment.html' },
                   { text: 'Konfiguration', link: '/de/guide/technical/configuration.html' },
+                  { text: 'Anleitung: Übersetzungen überschreiben', link: '/guide/technical/overwriting-translations.html' },
                 ],
               },
               {
