@@ -32,17 +32,7 @@
           </Field-Input>
 
           <!-- Overwrites -->
-          <FieldTextarea
-            alias="overwrites"
-            :name="$t('fields.overwrites.name')"
-            :rules="{}"
-            v-model="language.overwrites"
-          >
-            <template v-slot:description>
-              <span v-html="$t('fields.overwrites.description')" />
-            </template>
-          </FieldTextarea>
-          <!--FieldCode
+          <FieldCode
             alias="overwrites"
             :name="$t('fields.overwrites.name')"
             v-model="language.overwrites"
@@ -51,7 +41,7 @@
             <template v-slot:description>
               <span v-html="$t('fields.overwrites.description')" />
             </template>
-          </FieldCode-->
+          </FieldCode>
           <button type="submit" :disabled="invalid">
             <Icon name="check" /><span>{{ $t('save') }}</span>
           </button>
@@ -65,7 +55,7 @@
 import { ValidationObserver } from 'vee-validate';
 import Modal from '../../Modal.vue';
 import FieldInput from '../../fields/FieldInput.vue';
-import FieldTextarea from '../../fields/FieldTextarea.vue';
+import FieldCode from '../../fields/FieldCode.vue';
 
 export default {
   name: 'LanguageEditor',
@@ -82,7 +72,7 @@ export default {
   components: {
     Modal,
     FieldInput,
-    FieldTextarea,
+    FieldCode,
     ValidationObserver,
   },
   mounted() {
