@@ -146,7 +146,7 @@ module.exports = {
                   { text: 'Übersicht', link: '/de/guide/technical/overview.html' },
                   { text: 'Deployment', link: '/de/guide/technical/deployment.html' },
                   { text: 'Konfiguration', link: '/de/guide/technical/configuration.html' },
-                  { text: 'Anleitung: Übersetzungen überschreiben', link: '/guide/technical/overwriting-translations.html' },
+                  { text: 'Anleitung: Übersetzungen überschreiben', link: '/de/guide/technical/overwriting-translations.html' },
                 ],
               },
               {
