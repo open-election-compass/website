@@ -6,7 +6,7 @@
       :id="`generator-${alias}`"
       :name="alias"
       v-model="cache"
-      @change="publish()"
+      @input="publish()"
       :highlight="highlighter"
       line-numbers
     />
@@ -76,6 +76,7 @@ export default {
       return highlight(code, languages.yaml);
     },
     publish() {
+      console.log('hello')
       this.$emit('change', this.cache);
     },
   },
