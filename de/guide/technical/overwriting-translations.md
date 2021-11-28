@@ -85,6 +85,19 @@ Aktuell werden die folgenden Sprachen offiziell unterstützt:
 - Deutsch
 - Englisch
 
+Die folgenden Übersetzungen wurden durch die Community bereitgestellt:
+
+- Arabisch (AR)
+- Spanisch (ES)
+- Französisch (FR)
+- Ungarisch (HU)
+- Indonesisch (ID)
+- Italienisch (IT)
+- Niederländisch (NL)
+- Polnisch (PL)
+- Portugiesisch (PT)
+- Türkisch (TR)
+
 ### Wie überschreibt man Übersetzungen?
 
 Jede offiziell unterstützte Sprache hat eine eigene YAML-Datei auf GitHub. Genauer gesagt gibt es

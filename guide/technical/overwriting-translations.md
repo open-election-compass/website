@@ -82,6 +82,19 @@ Currently, the following languages are officially supported:
 - German
 - English
 
+The following translations were provided by the community:
+
+- Arabic (AR)
+- Spanish (ES)
+- French (FR)
+- Hungarian (HU)
+- Indonesian (ID)
+- Italian (IT)
+- Dutch (NL)
+- Polish (PL)
+- Portuguese (PT)
+- Turkish (TR)
+
 ### So how do you actually overwrite translations?
 
 Every language that is officially supported has it's own YAML file on GitHub. Actually, there are
