@@ -65,7 +65,7 @@ Version 1.0.0 befindet sich noch in der Entwicklung und automatisierte Tests sin
     </p>
   </div>
   <div class="feature">
-    <h2>Mehrsprachig</h2>
+    <h2>12+ Sprachen</h2>
     <p>
       Stelle ein und denselben Wahlkompass in mehreren Sprachen bereit um mehr Menschen zu
       erreichen.

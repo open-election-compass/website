@@ -55,7 +55,7 @@ Version 1.0.0 is still under development and coverage of automated tests is not 
     <p>Design, User Experience, Technical Implementation and Documentation are state of the art.</p>
   </div>
   <div class="feature">
-    <h2>Multilingual</h2>
+    <h2>12+ Languages</h2>
     <p>Provide the same election compass in multiple languages to engage a bigger audience.</p>
   </div>
   <div class="feature">
