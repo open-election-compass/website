@@ -7,7 +7,7 @@
         :name="$t('fields.configuration.name')"
         type="file"
         rules="ext:json"
-        v-model="configuration"
+        v-model="rawConfigurationFile"
         preview="configuration"
         returnType="text"
         :description="$t('fields.configuration.description')"
@@ -106,13 +106,37 @@
         :description="$t('fields.openGraphUrl.description')"
       />
     </fieldset>
+    <fieldset v-if="configuration">
+      <legend>{{ $t('languages') }}</legend>
+      <FieldSelect
+        alias="extractLanguages"
+        :name="$t('fields.extract-languages.name')"
+        rules=""
+        v-model="store.extractLanguages"
+        :options="[
+          { value: 'off', name: $t('fields.extract-languages.options.no') },
+          { value: 'on', name: $t('fields.extract-languages.options.yes') },
+        ]"
+        :description="$t('fields.extract-languages.description')"
+      />
+
+      <FieldSelect
+        v-if="store.extractLanguages === 'on'"
+        alias="mainLanguage"
+        :name="$t('fields.main-language.name')"
+        rules=""
+        v-model="store.mainLanguage"
+        :options="languages.map(language => ({ value: language.uuid, name: language.name }))"
+        :description="$t('fields.main-language.description')"
+      />
+    </fieldset>
     <hr />
     <a
       class="button"
       v-if="resultBlobUrl !== null"
       :disabled="invalid"
       :href="resultBlobUrl"
-      :download="$t('filename')"
+      :download="store.extractLanguages === 'on' ? $t('filename.zip') : $t('filename.html')"
     >
       <Icon name="download" />
       <span>{{ $t('download') }}</span>
@@ -124,6 +148,11 @@
 import * as Eta from 'eta';
 import tag from 'html-tag';
 import { v1 as uuid } from 'uuid';
+import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
+import set from 'lodash/set';
+import unset from 'lodash/unset';
+import { strToU8, zipSync } from 'fflate';
 import { localize, ValidationObserver } from 'vee-validate';
 import de from 'vee-validate/dist/locale/de.json';
 import en from 'vee-validate/dist/locale/en.json';
@@ -132,7 +161,8 @@ import FieldInput from '../../fields/FieldInput';
 import FieldSelect from '../../fields/FieldSelect';
 import LanguageSwitch from '../../LanguageSwitch';
 import template from '!!raw-loader!./template/template.html';
-import library from '!!raw-loader!./template/open-election-compass.umd.min.js';
+import library from '!!raw-loader!@open-election-compass/client/dist/open-election-compass.umd.min.js';
+import style from '!!raw-loader!@open-election-compass/client/dist/style.css';
 import faviconPixel from '!!url-loader!./template/favicon.png';
 import faviconVector from '!!url-loader!./template/favicon.svg';
 import faviconApple from '!!url-loader!./template/apple-touch-icon.png';
@@ -154,6 +184,7 @@ export default {
   },
   data() {
     return {
+      rawConfigurationFile: null,
       configuration: null,
       store: {
         description: {},
@@ -165,14 +196,18 @@ export default {
         friendsPath: null,
         openGraphImage: null,
         openGraphUrl: null,
+        extractLanguages: 'off',
+        mainLanguage: null,
       },
       resultBlobUrl: null,
     };
   },
   mounted() {
     localize(this.$lang.substring(0, 2));
+    this.$watch('rawConfigurationFile', this.parseRawConfigurationFile);
     this.$watch('configuration', this.generate);
     this.$watch('store', this.generate, { deep: true });
+    this.$watch('store.extractLanguages', this.setDefaultMainLanguage);
     this.$i18n.locale = this.$lang;
   },
   computed: {
@@ -180,29 +215,108 @@ export default {
       if (!this.configuration) {
         return [];
       }
-      const configuration = JSON.parse(this.configuration);
-      if (configuration && Array.isArray(configuration.languages)) {
-        return configuration.languages.map((language) => {
+      if (this.configuration && Array.isArray(this.configuration.languages)) {
+        return this.configuration.languages.map((language) => {
           language.uuid = uuid();
           return language;
         });
       }
       return [];
     },
+    multilingualConfigurationPaths() {
+      if (this.configuration === null) {
+        return [];
+      }
+      const paths = [
+        'title',
+        'subtitle',
+        'introduction.heading',
+        'introduction.text',
+        'analysis.survey',
+        'analysis.institution'
+      ]
+      for (let p = 0; p < this.configuration.parties.length; p++) {
+        paths.push(`parties.${p}.name`);
+        paths.push(`parties.${p}.short`);
+        paths.push(`parties.${p}.description`);
+      }
+      for (let t = 0; t < this.configuration.theses.length; t++) {
+        paths.push(`theses.${t}.title`);
+        paths.push(`theses.${t}.statement`);
+        this.configuration.parties.forEach((party) => {
+          paths.push(`theses.${t}.positions.${party.alias}.explanation`);
+        })
+      }
+      return paths;
+    }
   },
   methods: {
-    toBlobLink(content) {
-      const blob = new Blob([ content ], { type: 'text/html' });
-      return URL.createObjectURL(blob);
+    setDefaultMainLanguage() {
+      this.store.mainLanguage = this.configuration.languages[0].uuid;
     },
-    generate() {
+    async getUiLocales(code) {
+      return (await import(`@open-election-compass/ui/src/locales/${code}.json`)).default
+    },
+    async getClientLocales(code) {
+      return (await import(`@open-election-compass/client/src/locales/${code}.json`)).default
+    },
+    /**
+     * Extracts the given language from configuration, mutating the configuration in the process.
+     */
+    extractLanguageFromConfiguration(configuration, code) {
+      const extraction = {};
+      const paths = this.multilingualConfigurationPaths;
+      paths.forEach((unsuffixed) => {
+        const path = `${unsuffixed}.${code}`;
+        set(extraction, unsuffixed, get(configuration, path));
+        unset(configuration, path);
+      });
+      return extraction;
+    },
+    parseRawConfigurationFile() {
+      if (typeof this.rawConfigurationFile !== 'string') {
+        this.configuration = null;
+        return;
+      }
+      this.configuration = JSON.parse(this.rawConfigurationFile);
+    },
+    async generate() {
       if (!this.configuration) {
         return this.resultBlobUrl = null;
       }
-      const configuration = JSON.parse(this.configuration);
+      console.log('Generating...')
+      const configuration = cloneDeep(this.configuration);
       if (this.languages.length <= 0 || typeof this.languages[0].code !== 'string') {
         return this.resultBlobUrl = null;
       }
+
+      // Compile locales, with language extraction if needed
+      const locales = []
+      for (const language of this.languages) {
+        const locale = {
+          ui: (await this.getUiLocales(language.code)),
+          client: (await this.getClientLocales(language.code)),
+        }
+        if (this.store.extractLanguages === 'on' && language.uuid !== this.store.mainLanguage) {
+          locale.content = this.extractLanguageFromConfiguration(configuration, language.code);
+        }
+
+        // Add hint on where to find locales to the configuration
+        const languageConfiguration = configuration.languages.find(item => item.code === language.code);
+        if (this.store.extractLanguages === 'on' && language.uuid !== this.store.mainLanguage) {
+          languageConfiguration['load-from-url'] = `./oec-locale-${language.code}.json`
+        } else {
+          languageConfiguration['load-from-tag'] = `#oec-locales-${language.code}`
+        }
+        locales.push({
+          code: language.code,
+          uuid: language.uuid,
+          json: JSON.stringify(locale),
+        })
+      }
+
+      const mainLocale = locales.find(locale => locale.uuid === this.store.mainLanguage);
+
       const html = Eta.render(template, {
         tag,
         languages: this.languages,
@@ -216,14 +330,35 @@ export default {
         description: this.store.description,
         openGraphImage: this.store.openGraphImage,
         openGraphUrl: this.store.openGraphUrl,
+        extractLanguages: this.store.extractLanguages,
+        mainLanguage: this.store.mainLanguage,
+        locales,
+        mainLocale,
         faviconPixel,
         faviconVector,
         faviconApple,
         library,
-        configuration: this.configuration,
+        style,
+        configuration: JSON.stringify(configuration),
       });
-      this.resultBlobUrl = this.toBlobLink(html);
-      return;
+
+      // Generate ZIP if language are extracted and we have multiple output files
+      if (this.store.extractLanguages === 'on') {
+        const files = {
+          'index.html': strToU8(html),
+        }
+        locales.forEach((locale) => {
+          if (locale.uuid === this.store.mainLanguage) {
+            return; // main language is not extracted
+          }
+          files[`oec-locale-${locale.code}.json`] = strToU8(locale.json);
+        });
+        const zipped = zipSync(files);
+        this.resultBlobUrl =  URL.createObjectURL(new Blob([zipped], { type: 'application/zip' }));
+      } else {
+        const blob = new Blob([ html ], { type: 'text/html' });
+        this.resultBlobUrl =  URL.createObjectURL(blob);
+      }
     },
   },
   i18n: {
@@ -232,8 +367,12 @@ export default {
         file: '1. Upload configuration file',
         options: '2. Options',
         seo: '3. Search engine settings',
+        languages: '4. Languages',
         download: 'Download',
-        filename: 'election-compass.html',
+        filename: {
+          html: 'election-compass.html',
+          zip: 'election-compass.zip'
+        },
         fields: {
           title: {
             name: 'Title',
@@ -284,6 +423,18 @@ export default {
             description: 'To make sure, the correct URL is used on various social media platforms, you can set the URL where your election compass will be available.',
             placeholder: 'https://example.com/election-compass'
           },
+          'extract-languages': {
+            name: 'Extract translations',
+            options: {
+              yes: 'Yes',
+              no: 'No',
+            },
+            description: 'By default, all translations are embedded into the HTML file. If you\'re using many languages it is recommended to extract all languages but the default one. This will generate additional files that will be loaded on demand.'
+          },
+          'main-language': {
+            name: 'Default language',
+            description: 'The translations of the default language will still be embedded, all other will be extracted.'
+          },
           configuration: {
             name: 'Configuration file',
             description: 'A configuration file in the JSON file format. You can write one from scratch, or you can use the Configuration Editor.',
@@ -294,6 +445,7 @@ export default {
         file: '1. Konfigurationsdatei hochladen',
         options: '2. Suchmaschinen-Einstellungen',
         seo: '3. Suchmaschinen-Einstellungen',
+        languages: '4. Sprachen',
         download: 'Herunterladen',
         filename: 'wahlkompass.html',
         fields: {
@@ -345,6 +497,18 @@ export default {
             name: 'Open Graph Url',
             description: 'Um sicher zu gehen, dass die korrekte URL in diversen sozialen Netzwerken verwendet wird, kannst du hier die URL setzen, unter der dein Wahlkompass zur Verfügung stehen wird.',
             placeholder: 'https://example.com/election-compass'
+          },
+          'extract-languages': {
+            name: 'Sprachen auslagern',
+            options: {
+              yes: 'Ja',
+              no: 'Nein',
+            },
+            description: 'Standardmäßig werden alle Übersetzungen in die HTML-Datei eingebettet. Wenn du viele Sprachen verwendest, empfiehlt es sich, alle Sprachen außer der Standard-Sprache auszulagern. Dadurch werden zusätzliche Dateien generiert, welche auf Bedarf nachgeladen werden.'
+          },
+          'main-language': {
+            name: 'Standard-Sprache',
+            description: 'Die Übersetzungen der Standard-Sprache werden weiterhin eingebettet, alle übrigen werden ausgelagert.'
           },
           configuration: {
             name: 'Konfigurationsdatei',

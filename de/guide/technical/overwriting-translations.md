@@ -87,18 +87,36 @@ Aktuell werden die folgenden Sprachen offiziell unterstützt:
 
 Die folgenden Übersetzungen wurden durch die Community bereitgestellt:
 
-- Arabisch (AR)
-- Spanisch (ES)
-- Französisch (FR)
-- Ungarisch (HU)
-- Indonesisch (ID)
-- Italienisch (IT)
-- Niederländisch (NL)
-- Polnisch (PL)
-- Portugiesisch (PT)
-- Türkisch (TR)
+- Arabisch (ar)
+- Aserbaidschanisch (az)
+- Bengali (bn)
+- Chinesisch Traditionell (zh-TW)
+- Kroatisch (hr)
+- Griechisch (el)
+- Hausa (ha)
+- Hebräisch (he)
+- Hindi (hi)
+- Ungarisch (hu)
+- Indonesisch (id)
+- Italienisch (it)
+- Japanisch (ja)
+- Kinjaruanda (rw)
+- Koreanisch (ko)
+- Malajalam (ml-IN)
+- Persisch (fa)
+- Polnisch (pl)
+- Portugiesisch, Brazilian (pt-BR)
+- Rumänisch (ro)
+- Russisch (ru)
+- Serbisch, Kyrillisch (sr)
+- Slovakisch (sk)
+- Spanisch (es-ES)
+- Swahili (sw)
+- Türkisch (tr)
+- Ukrainisch (uk)
+- Vietnamesisch (vi)
 
-### Wie überschreibt man Übersetzungen?
+### Wie überschreibt man Übersetzungen? (veraltet)
 
 Jede offiziell unterstützte Sprache hat eine eigene YAML-Datei auf GitHub. Genauer gesagt gibt es
 für jede Sprache zwei Dateien:

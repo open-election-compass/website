@@ -20,6 +20,9 @@
     <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="<%= it.faviconApple %>">
     <meta name="theme-color" content="#d69e2e">
     <meta name="generator" content="OpenElectionCompass v1.0.0-beta.8">
+    <style>
+      <%~ it.style %>
+    </style>
   </head>
   <body>
     <div id="open-election-compass">
@@ -40,5 +43,15 @@
     <script type="application/json" id="oec-content">
       <%~ it.configuration %>
     </script>
+    <% it.locales.forEach((locale) => { %>
+      <script type="application/json" id="oec-locales-<%~ locale.code %>">
+        <%~ locale.json %>
+      </script>
+    <% }) %>
+    <% if (it.extractLanguages === 'on' && it.mainLocale) { %>
+      <script type="application/json" id="oec-locales-<%~ it.mainLocale.code %>">
+        <%~ it.mainLocale.json %>
+      </script>
+    <% } %>
   </body>
 </html>

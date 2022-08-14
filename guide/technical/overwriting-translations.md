@@ -84,18 +84,36 @@ Currently, the following languages are officially supported:
 
 The following translations were provided by the community:
 
-- Arabic (AR)
-- Spanish (ES)
-- French (FR)
-- Hungarian (HU)
-- Indonesian (ID)
-- Italian (IT)
-- Dutch (NL)
-- Polish (PL)
-- Portuguese (PT)
-- Turkish (TR)
+- Arabic (ar)
+- Azerbaijani (az)
+- Bengali (bn)
+- Chinese Traditional (zh-TW)
+- Croatian (hr)
+- Greek (el)
+- Hausa (ha)
+- Hebrew (he)
+- Hindi (hi)
+- Hungarian (hu)
+- Indonesian (id)
+- Italian (it)
+- Japanese (ja)
+- Kinjarwanda (rw)
+- Korean (ko)
+- Malayalam (ml-IN)
+- Persian (fa)
+- Polish (pl)
+- Portuguese, Brazilian (pt-BR)
+- Romanian (ro)
+- Russian (ru)
+- Serbian, Cyrillic (sr)
+- Slovak (sk)
+- Spanish (es-ES)
+- Swahili (sw)
+- Turkish (tr)
+- Ukranian (uk)
+- Vietnamese (vi)
 
-### So how do you actually overwrite translations?
+### So how do you actually overwrite translations? (outdated)
 
 Every language that is officially supported has it's own YAML file on GitHub. Actually, there are
 two files for every language:
