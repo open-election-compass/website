@@ -60,6 +60,7 @@ export default {
         return {
           name: language.name,
           code: language.code,
+          direction: language.direction,
           overwrites: (
             typeof language.overwrites === 'string'
             && language.overwrites.trim().length > 0 ? yaml.load(language.overwrites) : undefined

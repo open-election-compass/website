@@ -82,6 +82,7 @@ export default {
             uuid: uuid(),
             name: language.name,
             code: language.code,
+            direction: language.direction,
             overwrites: typeof language.overwrites === 'object' ? yaml.dump(language.overwrites) : '',
           });
         });

@@ -25,8 +25,6 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/themes/prism-tomorrow.css';
 
-console.log(languages);
-
 export default {
   name: 'FieldCode',
   components: {
@@ -76,7 +74,6 @@ export default {
       return highlight(code, languages.yaml);
     },
     publish() {
-      console.log('hello')
       this.$emit('change', this.cache);
     },
   },

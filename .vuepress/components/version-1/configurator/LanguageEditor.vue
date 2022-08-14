@@ -31,6 +31,19 @@
             </template>
           </Field-Input>
 
+          <!-- Direction -->
+          <FieldSelect
+            alias="direction"
+            :name="$t('fields.direction.name')"
+            rules=""
+            v-model="language.direction"
+            :options="[
+              { value: 'ltr', name: $t('fields.direction.options.ltr') },
+              { value: 'rtl', name: $t('fields.direction.options.rtl') },
+            ]"
+            :description="$t('fields.direction.description')"
+          />
+
           <!-- Overwrites -->
           <FieldCode
             alias="overwrites"
@@ -56,6 +69,7 @@ import { ValidationObserver } from 'vee-validate';
 import Modal from '../../Modal.vue';
 import FieldInput from '../../fields/FieldInput.vue';
 import FieldCode from '../../fields/FieldCode.vue';
+import FieldSelect from '../../fields/FieldSelect.vue';
 
 export default {
   name: 'LanguageEditor',
@@ -73,6 +87,7 @@ export default {
     Modal,
     FieldInput,
     FieldCode,
+    FieldSelect,
     ValidationObserver,
   },
   mounted() {
@@ -95,6 +110,13 @@ export default {
             placeholder: 'en',
             description: 'A two letter, lowercase language code as defined by <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO 639-1</a>. E.g. \'en\' for English, \'de\' for German, etc.',
           },
+          direction: {
+            name: 'Direction',
+            options: {
+              ltr: 'LTR, left to right',
+              rtl: 'RTL, right to left',
+            }
+          },
           overwrites: {
             name: 'Overwrites',
             description: 'Use this field to overwrite the standard translations for the selected language or even to add a completely custom translation, e.g. for an unsupported language. This is an advanced feature that requires a little more technical skill. Thankfully, it\'s easy to learn and you can follow the guide <a href="/guide/technical/overwriting-translations.html" target="_blank">Overwriting Translations</a>.',
@@ -115,6 +137,13 @@ export default {
             name: 'Code',
             placeholder: 'en',
             description: 'Ein Sprachcode, bestehend aus zwei Kleinbuchstaben, wie in der Norm <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes" target="_blank">ISO 639-1</a> beschrieben. Beispiel: \'en\' für Englisch, \'de\' für Deutsch, etc.',
+          },
+          direction: {
+            name: 'Richtung',
+            options: {
+              ltr: 'LTR, links nach rechts',
+              rtl: 'RTL, rechts nach links',
+            }
           },
           overwrites: {
             name: 'Übersetzung überschreiben',

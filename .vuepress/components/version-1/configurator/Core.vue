@@ -69,7 +69,7 @@ export default {
   methods: {
     reset() {
       this.$set(this, 'store', {
-        languages: [{ uuid: uuid(), name: 'English', code: 'en' }],
+        languages: [{ uuid: uuid(), name: 'English', code: 'en', direction: 'ltr' }],
         algorithm: 'cityblock/approve-neutral-reject',
         title: {},
         subtitle: {},

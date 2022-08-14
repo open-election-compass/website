@@ -67,6 +67,7 @@ export default {
         uuid: null, // indicates, that this language is not yet present in the languages array
         name: '',
         code: '',
+        direction: 'ltr',
         overwrites: '',
       });
     },
