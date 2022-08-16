@@ -118,7 +118,7 @@ export default {
             }
           },
           overwrites: {
-            name: 'Overwrites',
+            name: 'Overwrites (JSON)',
             description: 'Use this field to overwrite the standard translations for the selected language or even to add a completely custom translation, e.g. for an unsupported language. This is an advanced feature that requires a little more technical skill. Thankfully, it\'s easy to learn and you can follow the guide <a href="/guide/technical/overwriting-translations.html" target="_blank">Overwriting Translations</a>.',
           },
         }
@@ -146,7 +146,7 @@ export default {
             }
           },
           overwrites: {
-            name: 'Übersetzung überschreiben',
+            name: 'Übersetzung überschreiben (JSON)',
             description: 'In diesem Feld können die Standard-Übersetzungen der ausgewählten Sprache überschrieben werden bzw. auch ganz eigene Übersetzungen hinterlegt werden, bspw. für eine Sprache, die derzeit nicht unterstützt wird. Dies ist eine fortgeschrittene Funktion, die ein wenig mehr technische Kenntnisse verlangt. Glücklicherweise ist es leicht zu lernen mithilfe dieser Anleitung: <a href="/de/guide/technical/overwriting-translations.html" target="_blank">Übersetzungen überschreiben</a>.',
           },
         }
