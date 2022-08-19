@@ -255,7 +255,7 @@ export default {
       this.store.mainLanguage = this.configuration.languages[0].uuid;
     },
     async getUiLocales(code) {
-      return (await import(`@open-election-compass/ui/src/locales/${code}.json`)).default
+      return (await import(`@open-election-compass/ui/src/locales/${code}.json`)).default.ui
     },
     async getClientLocales(code) {
       return (await import(`@open-election-compass/client/src/locales/${code}.json`)).default
