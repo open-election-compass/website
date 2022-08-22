@@ -148,6 +148,7 @@
 import * as Eta from 'eta';
 import tag from 'html-tag';
 import { v1 as uuid } from 'uuid';
+import assign from 'lodash/assign';
 import cloneDeep from 'lodash/cloneDeep';
 import get from 'lodash/get';
 import set from 'lodash/set';
@@ -301,6 +302,15 @@ export default {
           locale.content = this.extractLanguageFromConfiguration(configuration, language.code);
         }
 
+        // If there are overwrites, they will be merged into the locales directly to decrease size
+        if (language.overwrites) {
+          const uiOverwrites = language.overwrites.ui || {}
+          unset(language, 'overwrites.ui')
+          const clientOverwrites = language.overwrites
+          assign(locale.ui, uiOverwrites)
+          assign(locale.client, clientOverwrites)
+        }
+
         // Add hint on where to find locales to the configuration
         const languageConfiguration = configuration.languages.find(item => item.code === language.code);
         if (this.store.extractLanguages === 'on' && language.uuid !== this.store.mainLanguage) {
@@ -308,6 +318,7 @@ export default {
         } else {
           languageConfiguration['load-from-tag'] = `#oec-locales-${language.code}`
         }
+        unset(languageConfiguration, 'overwrites')
         locales.push({
           code: language.code,
           uuid: language.uuid,
