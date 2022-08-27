@@ -115,6 +115,7 @@ Die folgenden Übersetzungen wurden durch die Community bereitgestellt:
 - Slovakisch (sk)
 - Spanisch (es-ES)
 - Swahili (sw)
+- Thailändisch (th)
 - Türkisch (tr)
 - Ukrainisch (uk)
 - Vietnamesisch (vi)

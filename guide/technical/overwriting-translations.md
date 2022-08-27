@@ -79,7 +79,7 @@ looking for by using the dot-notation. For example, if I wanted to know how many
 could describe the "path" like so: `fruit.regional.peaches` and get `3` in return.
 
 Now, JSON can sometimes be a bit tricky. Should you experience problems with your JSON formatting,
-you can validate your file using something like <https://jsonlint.com//>.
+you can validate your file using something like <https://jsonlint.com/>.
 
 ## The supported languages
 
@@ -115,6 +115,7 @@ The following translations were provided by the community:
 - Slovak (sk)
 - Spanish (es-ES)
 - Swahili (sw)
+- Thai (th)
 - Turkish (tr)
 - Ukranian (uk)
 - Vietnamese (vi)
