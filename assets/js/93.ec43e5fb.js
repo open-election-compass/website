@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[93],{523:function(a){a.exports=JSON.parse('{"ui":{"async-button":{"error":{"heading":"Hitilafu imetokea","okay-button":"Sawa"}},"fields":{"select":{"choose":"Tafadhali chagua"}},"modal":{"done":"Tayari"}}}')}}]);

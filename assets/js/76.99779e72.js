@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[76],{506:function(a){a.exports=JSON.parse('{"ui":{"async-button":{"error":{"heading":"An samu matsala","okay-button":"OK"}},"fields":{"select":{"choose":"Dan Allah zaɓa"}},"modal":{"done":"Na gama"}}}')}}]);

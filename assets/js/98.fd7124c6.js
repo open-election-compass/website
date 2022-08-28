@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[98],{528:function(o){o.exports=JSON.parse('{"ui":{"async-button":{"error":{"heading":"發生錯誤","okay-button":"確定"}},"fields":{"select":{"choose":"請選擇"}},"modal":{"done":"完成"}}}')}}]);

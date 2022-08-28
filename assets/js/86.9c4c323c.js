@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[86],{516:function(o){o.exports=JSON.parse('{"ui":{"async-button":{"error":{"heading":"Wystąpił błąd","okay-button":"Okay"}},"fields":{"select":{"choose":"Proszę wybrać"}},"modal":{"done":"Załatwione"}}}')}}]);

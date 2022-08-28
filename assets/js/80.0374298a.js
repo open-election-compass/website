@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[80],{510:function(e){e.exports=JSON.parse('{"ui":{"async-button":{"error":{"heading":"Hiba történt","okay-button":"Rendben"}},"fields":{"select":{"choose":"Kérlek, válassz"}},"modal":{"done":"Kész"}}}')}}]);
